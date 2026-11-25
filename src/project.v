@@ -18,6 +18,10 @@
 module tt_um_XmasTree_MaligayangPasko(
   input  wire [7:0] ui_in,    // Dedicated inputs
   output wire [7:0] uo_out,   // Dedicated outputs
+  input  wire [7:0] uio_in,   // IOs: Input path
+  output wire [7:0] uio_out,  // IOs: Output path
+  output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
+  input  wire       ena,      // always 1 when the design is powered, so you can ignore it
   input  wire       clk,      // clock
   input  wire       rst_n     // reset_n - low to reset
 );
@@ -44,8 +48,12 @@ module tt_um_XmasTree_MaligayangPasko(
   // TinyVGA PMOD output mapping (driven straight from flip-flops)
   assign uo_out = {hs0, B[0], G[0], R[0], vs0, B[1], G[1], R[1]};
 
+  // Unused outputs assigned to 0.
+  assign uio_out = 0;
+  assign uio_oe  = 0;
+
   // Suppress unused signals warning
-  wire _unused_ok = &{ui_in};
+  wire _unused_ok = &{ena, ui_in, uio_in};
 
   hvsync_generator hvsync_gen(
     .clk(clk),
