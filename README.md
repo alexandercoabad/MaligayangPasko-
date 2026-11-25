@@ -1,10 +1,24 @@
 ![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
 
-# Christmas tree - Maligayang Pasko!
+# Maligayang Pasko! A Christmas tree in a Tiny Tapeout micro tile
 
+A 640x480 VGA pixel-art Christmas tree (blinking star, colour-cycling lights, falling snow, the word
+PASKO) in the experimental sky130 **micro tile** (`tiles: "micro"` in info.yaml; clk, rst_n, 8 inputs, 8 outputs).
 
+- [The datasheet](docs/info.md): how it works, the input, how to test it
+- [src/project.v](src/project.v): the design, one file (38 flip-flops, about 230 gates)
+- `src/config.json`, `src/no_synth.cells`: the micro-tile hardening settings (from the Pettit micro project, which fits the same tile)
 
-https://github.com/user-attachments/assets/5ccb7ce0-362f-4c48-bbb0-46bcfe8f8fcc
+![Preview](docs/preview.png)
+
+## Simulation
+
+```sh
+cd test
+make -B              # RTL: three frames against the cycle-exact model (test/model.py); writes frame.png
+```
+
+The 1x1 version of this project (full scene with the `MERRY CHRISTMAS!` / `MALIGAYANG PASKO!` banner) is in the git history.
 
 ## What is Tiny Tapeout?
 
